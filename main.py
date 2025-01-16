@@ -16,8 +16,8 @@ seaborn.countplot(y_train) # Visualizes how many of each label we have in our da
 
 # When using new unfamiliar datasets, it is always a good idea to check for missing values in the dataset, or NaN values, we can do this using numpy
 # When we test the images in this dataset, they should output False, but it may not be the case in every dataset
-numpy.isnan(x_train).any()
-numpy.isnan(x_test).any()
+print(numpy.isnan(x_train).any())
+print(numpy.isnan(x_test).any())
 
 # We know that our images are 28x28 pixels, but we need to know the shape of the images in order to train our model
 # This lets the model that each input image has 28 height and width, and will have 1 color channel (Grayscale)
@@ -26,9 +26,10 @@ input_shape = (28, 28, 1)
 # We also need to reshape the data, Tensorflow expects 4D shapes, but what we are inputting above is a 3D shape
 # The 4D shape is created by adding the 1 (that reprsents grayscale) to the end of the shape which was (60000, 28, 28)
 x_train = x_train.reshape(x_train.shape[0], x_train.shape[1], x_train.shape[2], 1)
-x_train /= 255.0
+x_train = x_train.astype('float32') / 255.0
 x_test = x_test.reshape(x_test.shape[0], x_test.shape[1], x_test.shape[2], 1)
-x_test /= 255.0
+x_test = x_test.astype('float32') / 255.0
+
 
 # We need to encode our labels next, as they are currently in the form of integers, but we need them to be in the form of one-hot encoded vectors
 y_train = tensorflow.one_hot(y_train.astype(numpy.int32), depth=10)
@@ -96,13 +97,15 @@ history = model.fit(x_train, y_train,
 # The following code will allow us to visualize the loss and accuracy of our model through Loss & Accuracy Curves
 fig, ax = plot.subplots(2,1)
 ax[0].plot(history.history['loss'], color='b', label="Training Loss")
-ax[0].plot(history.history['val_loss'], color='r', label="Validation Loss",axes =ax[0])
-legend = ax[0].legend(loc='best', shadow=True)
+ax[0].plot(history.history['val_loss'], color='r', label="Validation Loss")
+ax[0].legend(loc='best', shadow=True)
 
 ax[1].plot(history.history['acc'], color='b', label="Training Accuracy")
 ax[1].plot(history.history['val_acc'], color='r',label="Validation Accuracy")
-legend = ax[1].legend(loc='best', shadow=True)
-test_loss, test_acc = model.evaluate(x_test, y_test)
+ax[1].legend(loc='best', shadow=True)
+
+plot.tight_layout()
+plot.show()
 
 # The following code will allow us to visualize the confusion matrix of our model, and see where it went wrong
 # Predict the values from the testing dataset
@@ -116,3 +119,7 @@ confusion_mtx = tensorflow.math.confusion_matrix(Y_true, Y_pred_classes)
 
 plot.figure(figsize=(10, 8))
 seaborn.heatmap(confusion_mtx, annot=True, fmt='g')
+
+# Saving the Model
+model.save("mnist_model.h5")
+model.summary()
