@@ -92,3 +92,27 @@ history = model.fit(x_train, y_train,
                     validation_split=0.1, # Represents the 10% of images in the dataset reserved for testing accuracy
                     callbacks=[callbacks]
                 )
+
+# The following code will allow us to visualize the loss and accuracy of our model through Loss & Accuracy Curves
+fig, ax = plot.subplots(2,1)
+ax[0].plot(history.history['loss'], color='b', label="Training Loss")
+ax[0].plot(history.history['val_loss'], color='r', label="Validation Loss",axes =ax[0])
+legend = ax[0].legend(loc='best', shadow=True)
+
+ax[1].plot(history.history['acc'], color='b', label="Training Accuracy")
+ax[1].plot(history.history['val_acc'], color='r',label="Validation Accuracy")
+legend = ax[1].legend(loc='best', shadow=True)
+test_loss, test_acc = model.evaluate(x_test, y_test)
+
+# The following code will allow us to visualize the confusion matrix of our model, and see where it went wrong
+# Predict the values from the testing dataset
+Y_pred = model.predict(x_test)
+# Convert predictions classes to one hot vectors 
+Y_pred_classes = numpy.argmax(Y_pred,axis = 1) 
+# Convert testing observations to one hot vectors
+Y_true = numpy.argmax(y_test,axis = 1)
+# compute the confusion matrix
+confusion_mtx = tensorflow.math.confusion_matrix(Y_true, Y_pred_classes) 
+
+plot.figure(figsize=(10, 8))
+seaborn.heatmap(confusion_mtx, annot=True, fmt='g')
