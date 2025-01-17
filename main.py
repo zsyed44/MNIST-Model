@@ -121,5 +121,5 @@ plot.figure(figsize=(10, 8))
 seaborn.heatmap(confusion_mtx, annot=True, fmt='g')
 
 # Saving the Model
-model.save("mnist_model.h5")
+model.save("mnist_model.keras")
 model.summary()
