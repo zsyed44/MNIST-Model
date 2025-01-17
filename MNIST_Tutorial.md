@@ -194,9 +194,11 @@ Replace `main.py` with your script name.
 
 📌 **For additional help, visit the workshop mentors or the GitHub repository.** 🚀
 
-Images of potential GUIs in the program
+---
+
+## **Images of potential GUIs in the program**
+
 ![image](https://github.com/user-attachments/assets/271a8df1-2525-4c0f-a167-fa4e0b9611cd)
 ![image](https://github.com/user-attachments/assets/736c3583-9b79-42e4-a70e-c75b99971061)
 ![image](https://github.com/user-attachments/assets/8402f4e0-4394-4c63-bdd0-e9345ada95c8)
 ![image](https://github.com/user-attachments/assets/1eaddff2-ba33-4392-a804-fe67bbd51900)
-
