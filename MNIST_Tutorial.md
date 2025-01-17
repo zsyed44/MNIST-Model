@@ -1,10 +1,10 @@
 # **MNIST Handwritten Digit Classifier - Workshop Guide**
 
 ## **Abstract**
-This document, written by **Zain Syed**, VP Tech at **WE AutoPilot**, will guide you through building your first **Machine Learning model** using the **MNIST dataset**. The goal is to train an AI to recognize handwritten numbers by analyzing thousands of images and learning their patterns.
+This document, written by **Zain Syed**, the VP Tech at WE AutoPilot, will guide you through building (potentially) your first **Machine Learning model!** We will be using the MNIST dataset to make an AI tool to recognize handwritten numbers. The principle is, by submitting thousands of handwritten images, we can teach our computer to recognize patterns, making it capable of recognizing numbers
 
 ### **Why is this important?**
-While recognizing handwritten numbers is simple for humans, computers don't inherently understand symbols like "8"—they treat them as abstract representations. Teaching a computer to visually interpret numbers is a major advancement and is foundational for applications such as **autonomous driving, AI handwriting recognition, and more**.
+Well, although it may seem like a trivial task to read handwritten numbers (unless it’s my handwriting), for a computer it is really huge. If I get a calculator, or a computer to type out the number “8”, they do not actually understand what 8 is, or what it represents. It is merely a symbol among others to a computer. If we can train a computer to **visually interpret and understand** a number, that is incredible news! It is like the natural next step when it comes to computer programming. Teaching a computer to visually interpret numbers is a major advancement and is foundational for applications such as **autonomous driving, AI handwriting recognition, and more**.
 
 ---
 
@@ -25,10 +25,19 @@ If you encounter issues, refer to the [FAQ](#faqs-and-common-problems) or ask a 
 ### **Creating a Python File**
 Create a new Python file (e.g., `main.py`) and import the required libraries:
 ```python
+import tensorflow
+import numpy
+import matplotlib.pyplot
+```
+
+**OR**
+
+```python
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
 ```
+It all depends on how you wish to define your namespaces!
 
 ---
 
@@ -54,11 +63,12 @@ import seaborn as sns
 sns.countplot(x=y_train)
 ```
 
-### **Checking for Missing Values**
+### **Optional: Checking for Missing Values**
 ```python
 print(np.isnan(x_train).any())
 print(np.isnan(x_test).any())
 ```
+Ideally here we are looking for both to print out the word "False"
 
 ---
 
@@ -69,8 +79,11 @@ TensorFlow expects **4D input** for CNNs (`(batch_size, height, width, channels)
 input_shape = (28, 28, 1)  # Define input shape (1 channel for grayscale)
 
 # Reshape images and normalize pixel values
-x_train = x_train.reshape(-1, 28, 28, 1) / 255.0
-x_test = x_test.reshape(-1, 28, 28, 1) / 255.0
+x_train = x_train.reshape(-1, 28, 28, 1)
+x_train = x_train.astype('float32') / 255.0
+x_test = x_test.reshape(-1, 28, 28, 1)
+x_test = x_test.astype('float32') / 255.0
+
 ```
 
 ### **Encoding Labels (One-Hot Encoding)**
