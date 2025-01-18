@@ -1,5 +1,8 @@
 # MNIST Handwritten Digit Classifier 🧠✍️
 
+## **THIS REPOSITORY IS NO LONGER GOING TO BE USED FOR THE MNIST WORKSHOP, WE HAVE SWITCHED TO [THIS REPOSITORY]([url](https://github.com/zsyed44/MNIST-Workshop-PyTorch)) NOW THAT WE ARE USING PYTORCH!**
+**Regardless, this repo is very useful for those who attend the workshop and are looking into learning more about tensorflow!**
+
 This repository will be used to store my trained MNIST model. It will be trained using Tensorflow and the MNIST dataset, and will be the basis of the code gone over at the WEAP MNIST Workshop on January 30th 2025.
 
 This repository contains an **MNIST digit classification model**, guiding you through **building a Convolutional Neural Network (CNN)** using TensorFlow and Keras. The model learns to recognize **handwritten digits (0-9)** by training on thousands of labeled examples.
